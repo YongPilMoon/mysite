@@ -4,7 +4,7 @@
 
 {% endblock %}
 {% block content %}
-    <h3>Facebook friends ranking</h3>
+<h3>Facebook friends ranking</h3>
 <form action="" method="POST">
     {% csrf_token %}
     {% for item in most_dict_list %}
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-    <input type="text" name="item" value="{{ item }}">
+    <input type="hidden" name="item" value="{{ item }}">
     {% endfor %}
     <button type="submit">전송</button>
 </form>

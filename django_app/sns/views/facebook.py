@@ -1,7 +1,9 @@
 import requests
 import json
+import ast
+
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from collections import Counter
@@ -10,13 +12,12 @@ from apis import facebook
 from sns.models import FriendsRank
 
 __all__ = [
-    'update_friends_ranking',
-    'show_friends_ranking',
+    'friends_ranking',
     'show_mypost'
 ]
 
 
-def update_friends_ranking(request):
+def friends_ranking(request):
     if request.method == 'GET':
         if request.GET.get('error'):
             return HttpResponse('사용자 로그인 거부')
@@ -79,21 +80,24 @@ def update_friends_ranking(request):
                 'most_dict_list': most_dict_list
             }
             return render(request, 'sns/facebook/friends_ranking.html', context)
-        elif request.method == 'POST':
-            import ast
-            str_item_list = request.POST.getlist('item')
+    elif request.method == 'POST':
+        dict_friends_info = []
+        str_item_list = request.POST.getlist('item')
+        for str_item in str_item_list:
+            item = ast.literal_eval(str_item)
+            dict_friends_info.append(item)
 
-            for str_item in str_item_list:
-                item = ast.listeral_eval(str_item)
-            print("string item: ", item)
-
-def show_friends_ranking(request):
-    friends = FriendsRank.objects.all().order_by('-comment_count')
-    context = {
-        'friends': friends
-    }
-
-    return render(request, 'sns/show_friends_ranking.html', context)
+        for data in dict_friends_info:
+            FriendsRank.objects.update_or_create(
+                friends_id=data['info']['id'],
+                defaults={
+                    'friends_id': data['info']['id'],
+                    'name': data['info']['name'],
+                    'comment_count': data['number'],
+                    'picture_url': data['info']['picture']['data']['url'],
+                }
+            )
+        return redirect('sns:index')
 
 
 def show_mypost(request):
@@ -127,4 +131,4 @@ def show_mypost(request):
         context ={
             'posts': post_data_list,
         }
-        return render(request, 'sns/show_my_posts.html', context)
+        return render(request, 'sns/facebook/show_my_posts.html', context)
