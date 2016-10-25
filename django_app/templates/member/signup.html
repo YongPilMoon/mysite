@@ -1,0 +1,44 @@
+{% extends 'common/base.html'%}
+
+{% block content %}
+
+  {% if error_message %}
+    <p>{{ error_message }}</p>
+  {% endif %}
+
+  <form action="" method="POST">
+  {% csrf_token %}
+    <div>
+    <label for="input-email">Email</label>
+    <input id="input-email" name="email" type="email">
+    </div>
+
+    <div>
+    <label for="input-password1">비밀번호</label>
+    <input id="input-password1" name="password1" type="password">
+    </div>
+
+    <div>
+    <label for="input-password2">비밀번호 확인</label>
+    <input id="input-password2" name="password2" type="password">
+    </div>
+
+    <div>
+    <label for="input-nickname">Nickname</label>
+    <input id="input-nickname" name="nickname" type="type">
+    </div>
+
+    <div>
+    <label for="input-lastname">Lastname</label>
+    <input id="input-lastname" name="lastname" type="type">
+    </div>
+
+    <div>
+    <label for="input-firstname">FirstName</label>
+    <input id="input-firstname" name="firstname" type="type">
+    </div>
+
+
+    <button type="submit">회원가입</button>
+  </form>
+{% endblock %}

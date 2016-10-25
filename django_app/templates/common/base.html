@@ -1,0 +1,94 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>용필's 블로그</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="{% static 'css/common.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+  {% block link %}
+  {% endblock %}
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a href="{% url 'blog:post_list' %}" class="navbar-brand">myp's Blog</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="main-navbar">
+        <ul class="nav navbar-nav navbar-right">
+          {% if user.is_authenticated %}
+          <li>
+            <p class="text">{{ user.email }}</p>
+          </li>
+          <li>
+            <a href="{% url 'blog:post_list' %}">Blog</a>
+          </li>
+          <li>
+            <a href="{% url 'video:bookmark_list' %}">Video</a>
+          </li>
+
+          <li>
+            <a href="{% url 'blog:post_new' %}">
+              <span class="glyphicon glyphicon-plus"> Newpost</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'sns:index' %}">Facebook</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'member:logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li>
+            <a href="{% url 'member:signup3' %}?next={{ request.path }}">
+              <span> SignUp</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'member:login' %}?next={{ request.path }}">Login</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    {% if messages %}
+    <div>
+      {% for message in messages %}
+        <div class="alert
+          {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}alert-danger
+          {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}alert-info
+          {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}alert-success
+          {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}alert-warning
+          {% elif message.level == DEFAULT_MESSAGE_LEVELS.DEBUG %}alert-danger
+          {% endif %}" role="alert">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    <div>
+    {% block content %}
+    {% endblock %}
+    </div>
+  <!--
+  <div>
+  <h2><a href="#">My first post</a></h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, modi!</p>
+  <p>published : 2016.10.10, 16:54</p>
+</div>
+
+<div>
+<h2><a href="#">My first post</a></h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, modi!</p>
+<p>published : 2016.10.10, 16:54</p>
+</div> -->
+  </div>
+</body>
+</html>

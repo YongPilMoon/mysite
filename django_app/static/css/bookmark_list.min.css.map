@@ -1,0 +1,9 @@
+{
+	"version": 3,
+	"file": "bookmark_list.min.css",
+	"sources": [
+		"../sass/bookmark_list.sass"
+	],
+	"mappings": "AAAA,AAAG,GAAA,AAAA,eAAe,AAAC,CACjB,MAAM,CAAE,IAAK,CAAG,AAClB,AAAE,EAAA,AAAA,eAAe,AAAC,CAChB,eAAe,CAAE,IAAK,CAAG,AAC3B,AAAG,GAAA,AAAA,WAAW,AAAC,CACb,UAAU,CAAE,IAAK,CAAG",
+	"names": []
+}

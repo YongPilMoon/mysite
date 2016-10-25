@@ -1,0 +1,28 @@
+{% extends 'common/base.html' %}
+
+{% block link %}
+
+{% endblock %}
+{% block content %}
+    <h3>Facebook friends ranking</h3>
+<form action="" method="POST">
+    {% csrf_token %}
+    {% for item in most_dict_list %}
+        <div class="row custom-row">
+
+            <div class="col-md-2">
+            <img src="{{item.info.picture.data.url}}" alt="">
+            </div>
+
+            <div class="col-md-10">
+            <p>{{forloop.counter}}등 {{item.info.name}}</p>
+            <p>댓글 갯수: {{item.number}}</p>
+
+            </div>
+        </div>
+
+    <input type="text" name="item" value="{{ item }}">
+    {% endfor %}
+    <button type="submit">전송</button>
+</form>
+{% endblock %}

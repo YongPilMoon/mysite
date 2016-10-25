@@ -1,0 +1,38 @@
+{% extends 'common/base.html' %}
+{% load staticfiles %}
+
+{% block link %}
+	<link rel="stylesheet" href="{% static 'css/bookmark_list.min.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- 검색화면으로 가기 버튼 구현 -->
+<a href="{% url 'video:search' %}" class="btn btn-primary">Search videos...</a>
+<div class="add-div-height">
+</div>
+{% if videos %}
+	{% for video in videos %}
+	<div class="row custom-row">
+		<div class="col-md-6">
+			<a href="{% url 'video:bookmark_detail' pk=video.pk %}">
+				<img src="{{ video.thumbnail }}" alt="">
+			</a>
+		</div>
+		<div class="col-md-6">
+			<p>Title : {{ video.title }}</p>
+			<p>Description : {{ video.description }}</p>
+			<p>Published : {{ video.published_date|date:"Y.m.d" }}</p>
+			<a href="{% url 'video:bookmark_delete' pk=video.pk %}" class="btn btn-danger btn-xs">Delete</a>
+			<span class="btn btn-xs btn-warning">
+				<span class="glyphicon glyphicon-star"></span>
+				{{ video.users.count }}
+			</span>
+		</div>
+	</div>
+	{% endfor %}
+{% else %}
+<h3>Bookmark를 해주세요!</h3>
+{% endif %}
+
+{% endblock %}
