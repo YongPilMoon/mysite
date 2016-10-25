@@ -11,6 +11,8 @@ urlpatterns = [
     url(r'^member/', include('member.urls', namespace='member')),
     url(r'^video/', include('video.urls', namespace='video')),
     url(r'^sns/', include('sns.urls', namespace='sns')),
+    url(r'^album/', include('photo.urls', namespace='album')),
+
     #Common
     url(r'^error/$', views.error, name='error')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
