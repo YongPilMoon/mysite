@@ -2,9 +2,13 @@
 
 {% block content %}
  {% for album in albums %}
-    <p>{{ album.title }}</p>
-    <p>{{ album.description}}</p>
-    <p>{{ album.owner }}</p>
+    <p>{{forloop.counter}}. {{ album.title }}</p>
+    <p>앨범 설명: {{ album.description}}</p>
+    <p>앨범 소유자: {{ album.owner }}</p>
  {% endfor %}
-
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="input">앨범 추가</button>
+</form>
 {% endblock %}
