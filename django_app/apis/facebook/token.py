@@ -28,7 +28,7 @@ def get_access_token(code, redirect_url):
     :param redirect_url: 로그인 시 redirect_uri로 전달한 값
     :return: 액세스 토큰
     """
-    print('code : %s' % code)
+
     REDIRECT_URL = redirect_url
 
     # 받은 'code'값과 client_id, client_secret값을 사용해서 access_token을 얻는다
@@ -105,5 +105,4 @@ def get_user_info(user_id, access_token):
     )
     r = requests.get(url_request_user_info)
     dict_user_info = r.json()
-    print(json.dumps(dict_user_info, indent=2))
     return dict_user_info
