@@ -118,7 +118,6 @@ def show_mypost(request):
                             )
         r = requests.get(url_request_post)
         dict_post_info = r.json()
-        print(dict_post_info)
 
         post_data_list = []
         for post in dict_post_info['data']:
