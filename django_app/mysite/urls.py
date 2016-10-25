@@ -1,6 +1,8 @@
 from django.conf.urls import include, url
 from django.contrib import admin
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -11,4 +13,4 @@ urlpatterns = [
     url(r'^sns/', include('sns.urls', namespace='sns')),
     #Common
     url(r'^error/$', views.error, name='error')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

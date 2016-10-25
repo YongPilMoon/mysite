@@ -15,6 +15,13 @@ import json
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [
+    STATIC_DIR,
+]
+
+# Media files
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 # 설정파일 폴더
@@ -25,9 +32,6 @@ config_file = open(os.path.join(CONF_DIR, 'settings_debug.json'))
 config = json.loads(config_file.read())
 config_file.close()
 # Static files
-STATICFILES_DIRS = [
-    STATIC_DIR,
-]
 
 # Auth
 AUTH_USER_MODEL = 'member.MyUser'
