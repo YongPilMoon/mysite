@@ -3,9 +3,16 @@
 
 {% block content %}
     {% for photo in photos %}
+    <div>
         <p>사진제목: {{photo.title}}</p>
         <img src={{photo.img.url}} alt="">
-
+        <a href="{% url 'album:photo_like' photo_pk=photo.pk %}">
+            <span class="glyphicon glyphicon-thumbs-up btn btn-primary"></span>x`
+        </a>
+        <a href="{% url 'album:photo_dislike' photo_pk=photo.pk %}">
+            <span class="glyphicon glyphicon-thumbs-down btn btn-primary"></span>
+        </a>
+    </div>
     {% endfor %}
     <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
