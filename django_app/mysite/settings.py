@@ -14,14 +14,17 @@ import os
 import json
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_URL = '/static/'
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
 # Media files
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
 # 설정파일 폴더
@@ -160,7 +163,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
-STATIC_URL = '/static/'
 # static 파일들은 view를 통할 필요가 없기 때문에  direct로 접근하여 가지고 온다.
 # 접근 경로는  STATIC_URL에 설정된 되로 접근이 가능하다. ex) 127.0.0.1/static/css/blog.css
 # STATIC_URL을 바꾸어주면 바꾸어 준대로 접근하게 되다. ex)/static/yongpil/
