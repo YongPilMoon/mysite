@@ -7,6 +7,7 @@
     </a>
     <p>앨범 설명: {{ album.description}}</p>
     <p>앨범 소유자: {{ album.owner }}</p>
+    <a href="{% url 'album:album_edit' album_pk=album.pk %}" type="input">edit</a>
  {% endfor %}
     <form action="" method="POST">
         {% csrf_token %}

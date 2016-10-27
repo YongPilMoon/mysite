@@ -1,0 +1,8 @@
+{% extends 'common/base.html' %}
+{% block content %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <div>{{ form.as_p }}</div>
+    <button type="submit">수정</button>
+</form>
+{% endblock %}

@@ -7,6 +7,7 @@ from photo.form import AlbumForm, PhotoForm
 __all__ = [
     "album_list",
     "album_detail",
+    "album_edit",
 ]
 
 
@@ -41,7 +42,6 @@ def album_detail(request, album_pk):
     if request.method == "POST":
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
-            print("===============================")
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
             img = form.cleaned_data['img']
@@ -63,3 +63,31 @@ def album_detail(request, album_pk):
             "form": form,
         }
         return render(request, 'album/album_detail.html', context)
+
+
+def album_edit(request, album_pk):
+    album = get_object_or_404(Album, pk=album_pk)
+    if request.method == "POST":
+        form = AlbumForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            owner = request.user
+            Album.objects.filter(pk=album.pk).update(
+                title=title,
+                description=description,
+                owner=owner
+            )
+            messages.info(request, "앨범이 수정되었습니다.")
+            return redirect('album:album_list')
+    else:
+        default_data = {
+            'title': album.title,
+            'description': album.description
+        }
+        form = AlbumForm(default_data)
+
+        context = {
+            "form": form,
+        }
+        return render(request, 'album/album_edit.html', context)
