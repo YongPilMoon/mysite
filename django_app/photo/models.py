@@ -1,3 +1,5 @@
+import os
+
 from django.db import models
 from member.models import MyUser
 
@@ -21,6 +23,10 @@ class Photo(models.Model):
     # Myuser가 Photo를 참조 할때 필요한 이름을 명시해 준다.
     like_users = models.ManyToManyField(MyUser, through='PhotoLike', related_name='photo_set_like_users', default=0)
     dislike_users = models.ManyToManyField(MyUser, through='PhotoDisLike', related_name='photo_set_dislike_users', default=0)
+
+    def delete(self, *args, **kwargs):
+        os.remove(self.img.path)
+        super().delete(*args, **kwargs)
 
     def __str__(self):
         return self.album, self.title

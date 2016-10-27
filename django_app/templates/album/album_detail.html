@@ -11,6 +11,7 @@
                 {{ photo.like_users.count }}
             </span>
         </a>
+        <a href="{% url 'album:photo_delete' photo_pk=photo.pk %}">delete</a>
         <a href="{% url 'album:photo_dislike' photo_pk=photo.pk %}">
             <span class="glyphicon glyphicon-thumbs-down btn btn-primary">
                 {{ photo.dislike_users.count }}

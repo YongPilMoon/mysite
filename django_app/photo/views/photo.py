@@ -5,7 +5,8 @@ from django.shortcuts import get_object_or_404, redirect
 
 __all__ = [
     'photo_like',
-    'photo_dislike'
+    'photo_dislike',
+    'photo_delete'
 ]
 
 
@@ -39,4 +40,11 @@ def photo_dislike(request, photo_pk):
         photo=photo,
         user=user
     )
+    return redirect('album:album_detail', album_pk=album.pk)
+
+
+def photo_delete(request, photo_pk):
+    photo = get_object_or_404(Photo,pk=photo_pk)
+    album = photo.album
+    photo.delete()
     return redirect('album:album_detail', album_pk=album.pk)
