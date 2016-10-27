@@ -1,17 +1,24 @@
 {% extends 'common/base.html' %}
 
 {% block content %}
- {% for album in albums %}
-    <a href="{%  url 'album:album_detail' album_pk=album.pk %}">
-        <p>{{forloop.counter}}. {{ album.title }}</p>
-    </a>
-    <p>앨범 설명: {{ album.description}}</p>
-    <p>앨범 소유자: {{ album.owner }}</p>
-    <a href="{% url 'album:album_edit' album_pk=album.pk %}" type="input">edit</a>
- {% endfor %}
-    <form action="" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="input">앨범 추가</button>
-    </form>
+<div id="album_list">
+    <h4>Album list</h4>
+    <ul class="list-group">
+         {% for album in albums %}
+         <li class="list-group-item">
+             <span class="badge">{{ album.photo_set.count }}</span>
+            <div>
+                 <a href="{%  url 'album:album_detail' album_pk=album.pk %}">
+                    <strong>{{ album.title }}</strong>
+                </a>
+             </div>
+             <span>{{album.owner.email}}</span>
+             <a href="{% url 'album:album_edit' album_pk=album.pk %}" type="input">edit</a>
+             {% if album.description %}
+             <span> | {{album.description}}</span>
+             {% endif %}
+         </li>
+         {% endfor %}
+        </ul>
+</div>
 {% endblock %}
