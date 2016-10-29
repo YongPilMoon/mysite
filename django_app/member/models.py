@@ -82,6 +82,10 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     # superuser를 생성시 입력할 필드 지정
     REQUIRED_FIELDS = ['last_name', 'first_name', 'nickname']
 
+    @property
+    def full_name(self):
+        return self.get_full_name()
+
     # CustomUserModel에 맞는 매니저 선언
     objects = MyUserManager()
 
