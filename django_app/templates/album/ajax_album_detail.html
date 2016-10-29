@@ -1,9 +1,13 @@
 {% extends 'common/base.html' %}
-
+{% load staticfiles %}
 
 {% block content %}
     <div id="album-detail">
         <h4> {{ album.title }}</h4>
+            <a href="{% url 'album:photo_multi_add' album_pk=album.pk %}" class="btn btn-primary btn-sm btn-top-right">
+                <span class="glyphicon glyphicon-plus"></span>
+                Photo Add
+            </a>
         <div>
             <span>{{album.owner.email}}</span>
             {% if album.description %}
@@ -30,22 +34,24 @@
                         <span>| {{ photo.description }}</span>
                         {% endif %}
                     </div>
+
                     <div class="like-container">
-                        <form action="{% url 'album:photo_like' photo_pk=photo.pk like_type='like' %}" method="POST" class="like-form">
-                            {% csrf_token %}
-                            <button
-                                class="btn label
-                                    {% if user in photo.like_users.all %}label-info
-                                    {% else %}label-default
-                                    {% endif %}"
-                                type="submit">
-                                <span class="glyphicon glyphicon-thumbs-up"></span>
-                                <span> {{ photo.like_users.count }}</span>
-                                </button>
-                        </form>
-                </div>
+                        <button id="btn-photo-{{ photo.pk }}-like" onclick="photoLike({{photo.pk}},'like')"class="btn label label-default">
+                            <span class="glyphicon glyphicon-thumbs-up"></span>
+                            <span id="photo-{{photo.pk}}-like-count">{{ photo.like_users.count}}</span>
+                        </button>
+
+                        <button id="btn-photo-{{ photo.pk }}-dislike" onclick="photoLike({{photo.pk}},'dislike')"class="btn label label-default">
+                            <span class="glyphicon glyphicon-thumbs-down"></span>
+                            <span id="photo-{{photo.pk}}-dislike-count">{{ photo.dislike_users.count}}</span>
+                        </button>
+                    </div>
             </div>
         </div>
         {% endfor %}
     </div>
+{% endblock %}
+
+{% block script %}
+<script src="{% static 'js/photo/album_detail.js' %}"></script>
 {% endblock %}

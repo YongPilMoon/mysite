@@ -1,2 +1,2 @@
-from .album import *
-from .photo import *
+from . album import *
+from . photo import *

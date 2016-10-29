@@ -29,7 +29,10 @@ class Photo(models.Model):
         super().delete(*args, **kwargs)
 
     def __str__(self):
-        return self.album, self.title
+        return self.title
+
+    def url_thumbnail(self):
+        return self.url_field('img_thumbnail', default='/static/img/default.jpg')
 
 
 class PhotoLike(models.Model):

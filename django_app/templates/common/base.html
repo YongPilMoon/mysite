@@ -6,8 +6,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>용필's 블로그</title>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+
+  <!-- jQuery -->
+  <script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+  <!-- Custum JS -->
+  <script src="{% static 'js/base.js' %}"></script>
+
   <link rel="stylesheet" href="{% static 'css/common.min.css' %}">
   <link rel="stylesheet" href="{% static 'css/blog.css' %}">
   {% block link %}
@@ -76,10 +88,10 @@
       {% endfor %}
     </div>
     {% endif %}
-    <div>
+      <div class="content-container">
     {% block content %}
     {% endblock %}
-    </div>
+      </div>
   <!--
   <div>
   <h2><a href="#">My first post</a></h2>
@@ -93,5 +105,7 @@
 <p>published : 2016.10.10, 16:54</p>
 </div> -->
   </div>
+  {% block script %}
+  {% endblock %}
 </body>
 </html>
