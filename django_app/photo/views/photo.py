@@ -76,7 +76,7 @@ def photo_multi_add(request, album_pk):
                     description=description,
                     img=file,
                 )
-            return redirect('photo:album_detail', pk=album_pk)
+            return redirect('album:album_detail', pk=album_pk)
     else:
         form = MultiPhotoForm()
     context = {
