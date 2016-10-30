@@ -9,7 +9,6 @@ class BaseModel(models.Model):
         abstract = True
 
     def url_field(self, fieldname, default=''):
-        # slef.'fieldname' (X)
         field = getattr(self, fieldname)
         if field and hasattr(field, 'url'):
             return field.url
