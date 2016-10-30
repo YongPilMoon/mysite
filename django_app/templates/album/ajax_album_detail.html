@@ -40,7 +40,6 @@
                             <span class="glyphicon glyphicon-thumbs-up"></span>
                             <span id="photo-{{photo.pk}}-like-count">{{ photo.like_users.count}}</span>
                         </button>
-
                         <button id="btn-photo-{{ photo.pk }}-dislike" onclick="photoLike({{photo.pk}},'dislike')"class="btn label label-default">
                             <span class="glyphicon glyphicon-thumbs-down"></span>
                             <span id="photo-{{photo.pk}}-dislike-count">{{ photo.dislike_users.count}}</span>

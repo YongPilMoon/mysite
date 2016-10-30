@@ -13,7 +13,22 @@
                 var spanDisLikeCount = $('#photo-' + photoPk + '-dislike-count');
                 spanDisLikeCount.text(dislikeCount);
 
-                var btnLike = $('#btn-photo-')
+                var btnLike = $('#btn-photo-' + photoPk + '-like');
+                var btnDislike = $('#btn-photo-' + photoPk + '-dislike');
+                if(userLike){
+                    btnLike.addClass('label-info');
+                    btnLike.removeClass('label-default');
+                } else {
+                    btnLike.removeClass('label-info');
+                    btnLike.addClass('label-default');
+                }
+                if(userDislike) {
+                    btnDislike.addClass('label-danger');
+                    btnDislike.removeClass('label-default');
+                } else {
+                    btnDislike.removeClass('label-danger');
+                    btnDislike.addClass('label-default');
+                }
             })
             .fail(function(response){
                 console.log(response);
