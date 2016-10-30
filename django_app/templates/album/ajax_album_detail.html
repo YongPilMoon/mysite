@@ -44,6 +44,9 @@
                             <span class="glyphicon glyphicon-thumbs-down"></span>
                             <span id="photo-{{photo.pk}}-dislike-count">{{ photo.dislike_users.count}}</span>
                         </button>
+                        <a class="btn label label-danger" href="{% url 'album:photo_delete' photo_pk=photo.pk %}">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </a>
                     </div>
             </div>
         </div>

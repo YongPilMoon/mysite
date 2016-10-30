@@ -84,37 +84,6 @@ def photo_multi_add(request, album_pk):
     }
     return render(request, 'album/photo_add.html', context)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 def photo_delete(request, photo_pk):
     photo = get_object_or_404(Photo,pk=photo_pk)
     album = photo.album
