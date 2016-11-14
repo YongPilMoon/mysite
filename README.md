@@ -1,4 +1,4 @@
-# mySitep
+# mySite
 Fastcampus 실습 프로젝트
 
 ### 개발환경 세팅
@@ -38,3 +38,5 @@ Fastcampus 실습 프로젝트
 	- 사진 썹네일 만들기
 	- 좋아요, 싫어요(AJAX이용 구현)
 	
+- 댓글 
+	- 댓글 작성시 글작성자에게 email 및 문자 전송
